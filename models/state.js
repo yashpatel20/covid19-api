@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const stateSchema = mongoose.Schema({
   State: String,
   "Total Confirmed cases (Indian National)": String,
-  "Total Confirmed cases ( Foreign National )": String,
+  "Total Confirmed cases (Foreign National)": String,
   "Cured/Discharged/Migrated": String,
   Death: String
 });
