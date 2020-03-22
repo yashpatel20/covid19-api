@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const stateSchema = mongoose.Schema({
   State: String,
-  "Total Confirmed cases (Indian National)": Number,
-  "Total Confirmed cases ( Foreign National )": Number,
-  "Cured/Discharged/Migrated": Number,
-  Death: Number
+  "Total Confirmed cases (Indian National)": String,
+  "Total Confirmed cases ( Foreign National )": String,
+  "Cured/Discharged/Migrated": String,
+  Death: String
 });
 
 stateSchema.set("toJSON", {

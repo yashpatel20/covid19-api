@@ -7,6 +7,7 @@ const covid19Router = require("./controllers/covid19");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
+require("./utils/cron");
 
 //DB connection
 logger.info("connecting to", config.MONGODB_URI);
@@ -26,7 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
 
-app.use("/api/covid19".covid19Router);
+app.use("/api/covid19", covid19Router);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

@@ -1,4 +1,6 @@
 const puppeteer = require("puppeteer");
+const State = require("./models/state");
+
 const scrape = async url => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -14,7 +16,7 @@ const scrape = async url => {
         id,
         state,
         confirmedNational,
-        confirmedInternation,
+        confirmedInternational,
         cured,
         death
       ] = dataArray.map(td => td.textContent);
@@ -22,15 +24,43 @@ const scrape = async url => {
         id,
         state,
         confirmedNational,
-        confirmedInternation,
+        confirmedInternational,
         cured,
         death
       };
     });
   });
-
+  data.splice(0, 3);
   console.log(data);
   browser.close();
+  //Insert into db
+  const updateDatabase = async data => {
+    await State.deleteMany({});
+    const promiseArr = [];
+    let i = 0;
+    for (; i < data.length - 1; i++) {
+      const state = new State({
+        State: data[i].state,
+        "Total Confirmed cases (Indian National)": data[i].confirmedNational,
+        "Total Confirmed cases ( Foreign National )":
+          data[i].confirmedInternational,
+        "Cured/Discharged/Migrated": data[i].cured,
+        Death: data[i].death
+      });
+      promiseArr.push(state.save());
+    }
+    const state = new State({
+      State: data[i].id,
+      "Total Confirmed cases (Indian National)": data[i].state,
+      "Total Confirmed cases ( Foreign National )": data[i].confirmedNational,
+      "Cured/Discharged/Migrated": data[i].confirmedInternational,
+      Death: data[i].cured
+    });
+    promiseArr.push(state.save());
+    await Promise.all(promiseArr);
+  };
+
+  updateDatabase(data);
 };
 
-scrape("https://www.mohfw.gov.in/");
+module.exports = scrape;
