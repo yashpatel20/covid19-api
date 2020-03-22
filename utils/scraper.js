@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const State = require("./models/state");
+const State = require("../models/state");
 
 const scrape = async url => {
   const browser = await puppeteer.launch();
