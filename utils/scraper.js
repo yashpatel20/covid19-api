@@ -7,7 +7,8 @@ const scrape = async url => {
   await page.goto(url);
 
   let data = await page.evaluate(() => {
-    const rowNodeList = document.querySelectorAll("tbody > tr");
+    const tables = document.querySelectorAll("table");
+    const rowNodeList = tables[1].querySelectorAll("tbody > tr");
     const rowArray = Array.from(rowNodeList);
     return rowArray.map(tr => {
       const dataNodeList = tr.querySelectorAll("td");
@@ -30,7 +31,6 @@ const scrape = async url => {
       };
     });
   });
-  data.splice(0, 3);
   console.log(data);
   browser.close();
   //Insert into db
