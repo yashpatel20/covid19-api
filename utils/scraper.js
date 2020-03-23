@@ -42,7 +42,7 @@ const scrape = async url => {
       const state = new State({
         State: data[i].state,
         "Total Confirmed cases (Indian National)": data[i].confirmedNational,
-        "Total Confirmed cases ( Foreign National )":
+        "Total Confirmed cases (Foreign National)":
           data[i].confirmedInternational,
         "Cured/Discharged/Migrated": data[i].cured,
         Death: data[i].death
@@ -52,7 +52,7 @@ const scrape = async url => {
     const state = new State({
       State: data[i].id,
       "Total Confirmed cases (Indian National)": data[i].state,
-      "Total Confirmed cases ( Foreign National )": data[i].confirmedNational,
+      "Total Confirmed cases (Foreign National)": data[i].confirmedNational,
       "Cured/Discharged/Migrated": data[i].confirmedInternational,
       Death: data[i].cured
     });
