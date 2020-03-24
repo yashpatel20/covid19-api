@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const State = require("../models/state");
 
 const scrape = async url => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.goto(url);
 
