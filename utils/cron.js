@@ -5,7 +5,7 @@ const scrape = require("./scraper");
 //   console.log("running cron");
 //   scrape("https://www.mohfw.gov.in/");
 // });
-cron.schedule("*/29 * * * *", () => {
+cron.schedule("*/15 * * * *", () => {
   console.log("running cron");
   scrape("https://www.mohfw.gov.in/");
 });
