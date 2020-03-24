@@ -7,8 +7,8 @@ const scrape = async url => {
   await page.goto(url);
 
   let data = await page.evaluate(() => {
-    const tables = document.querySelectorAll("table");
-    const rowNodeList = tables[1].querySelectorAll("tbody > tr");
+    const table = document.querySelector("#cases");
+    const rowNodeList = table.querySelectorAll("tbody > tr");
     const rowArray = Array.from(rowNodeList);
     return rowArray.map(tr => {
       const dataNodeList = tr.querySelectorAll("td");
