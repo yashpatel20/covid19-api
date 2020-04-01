@@ -9,5 +9,5 @@ const scrape = require("./scraper");
 //Every 12 hours
 cron.schedule("0 */12 * * *", () => {
   console.log("running cron");
-  scrape("https://www.mohfw.gov.in/");
+  scrape("http://www.covid19india.com/");
 });
