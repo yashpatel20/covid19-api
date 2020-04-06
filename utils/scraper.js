@@ -3,9 +3,7 @@ const India = require("../models/india");
 const World = require("../models/world");
 
 const scrape = async (url) => {
-  const browser = await puppeteer.launch({
-    ignoreDefaultArgs: ["--no-sandbox"],
-  });
+  const browser = await puppeteer.launch({});
   const page = await browser.newPage();
   await page.goto(url);
 
