@@ -2,8 +2,10 @@ const puppeteer = require("puppeteer");
 const India = require("../models/india");
 const World = require("../models/world");
 
-const scrape = async url => {
-  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+const scrape = async (url) => {
+  const browser = await puppeteer.launch({
+    ignoreDefaultArgs: ["--no-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto(url);
 
@@ -14,7 +16,7 @@ const scrape = async url => {
       State: "India",
       Cases: counter.querySelector(".red").textContent,
       Deaths: counter.querySelector(".black").textContent,
-      Recovered: counter.querySelector(".green").textContent
+      Recovered: counter.querySelector(".green").textContent,
     });
     const table = document.querySelector(".homeleft:nth-of-type(1) .casetable");
     const rowNodeList = table.querySelectorAll("div");
@@ -36,7 +38,7 @@ const scrape = async url => {
       Country: "World",
       Cases: counter.querySelector(".red").textContent,
       Deaths: counter.querySelector(".black").textContent,
-      Recovered: counter.querySelector(".green").textContent
+      Recovered: counter.querySelector(".green").textContent,
     });
     const table = document.querySelector(".homeleft:nth-of-type(2) .casetable");
     const rowNodeList = table.querySelectorAll("div");
@@ -55,7 +57,7 @@ const scrape = async url => {
   console.log(data2);
   browser.close();
   //Insert into db
-  const updateDatabaseIndia = async data => {
+  const updateDatabaseIndia = async (data) => {
     await India.deleteMany({});
     const promiseArr = [];
     for (let i = 0; i < data.length; i++) {
@@ -63,13 +65,13 @@ const scrape = async url => {
         State: data[i].State,
         Cases: data[i].Cases,
         Deaths: data[i].Deaths,
-        Recovered: data[i].Recovered
+        Recovered: data[i].Recovered,
       });
       promiseArr.push(state.save());
     }
     await Promise.all(promiseArr);
   };
-  const updateDatabaseWorld = async data => {
+  const updateDatabaseWorld = async (data) => {
     await World.deleteMany({});
     const promiseArr = [];
     for (let i = 0; i < data.length; i++) {
@@ -77,7 +79,7 @@ const scrape = async url => {
         Country: data[i].Country,
         Cases: data[i].Cases,
         Deaths: data[i].Deaths,
-        Recovered: data[i].Recovered
+        Recovered: data[i].Recovered,
       });
       promiseArr.push(country.save());
     }
