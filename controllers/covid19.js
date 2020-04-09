@@ -1,6 +1,7 @@
 const covid19Router = require("express").Router();
 const India = require("../models/india");
 const World = require("../models/world");
+const IndiaTS = require("../models/indiaTS");
 
 covid19Router.get("/", async (req, res) => {
   const data1 = await India.find({ State: "India" });
@@ -10,7 +11,7 @@ covid19Router.get("/", async (req, res) => {
 
 covid19Router.get("/India", async (req, res) => {
   const states = await India.find({});
-  res.json(states.map(state => state.toJSON()));
+  res.json(states.map((state) => state.toJSON()));
 });
 
 covid19Router.get("/India/:state", async (req, res) => {
@@ -20,9 +21,14 @@ covid19Router.get("/India/:state", async (req, res) => {
   else res.status(404).end();
 });
 
+covid19Router.get("/IndiaTS", async (req, res) => {
+  const data = await IndiaTS.find({});
+  res.json(data.map((item) => item.toJSON()));
+});
+
 covid19Router.get("/World", async (req, res) => {
   const countries = await World.find({});
-  res.json(countries.map(country => country.toJSON()));
+  res.json(countries.map((country) => country.toJSON()));
 });
 
 covid19Router.get("/World/:country", async (req, res) => {

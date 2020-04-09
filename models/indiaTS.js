@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 
-const indiaSchema = mongoose.Schema({
-  State: String,
+const indiaTsSchema = mongoose.Schema({
+  Date: String,
   Cases: String,
-  Deaths: String,
-  Recovered: String,
 });
 
-indiaSchema.set("toJSON", {
+indiaTsSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -15,4 +13,4 @@ indiaSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("India", indiaSchema);
+module.exports = mongoose.model("IndiaTS", indiaTsSchema);

@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const India = require("../models/india");
 const World = require("../models/world");
 
-const scrape = async (url) => {
+const scrapeData = async (url) => {
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
   await page.goto(url);
@@ -88,4 +88,4 @@ const scrape = async (url) => {
   updateDatabaseWorld(data2);
 };
 
-module.exports = scrape;
+module.exports = scrapeData;
