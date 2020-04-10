@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const IndiaTS = require("../models/indiaTS");
+const IndiaTS = require("../../models/indiaTS");
 
 const scrapeTsData = async (url) => {
   const browser = await puppeteer.launch({});
@@ -26,15 +26,13 @@ const scrapeTsData = async (url) => {
   //update database
   const updateDatabase = async (data) => {
     await IndiaTS.deleteMany({});
-    const promiseArr = [];
     for (let i = 0; i < data.length; i++) {
       const indiaTS = new IndiaTS({
         Date: data[i].Date,
         Cases: data[i].Cases,
       });
-      promiseArr.push(indiaTS.save());
+      await indiaTS.save();
     }
-    await Promise.all(promiseArr);
   };
 
   updateDatabase(dataIndiaTS);
