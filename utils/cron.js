@@ -16,7 +16,7 @@ const scrapeTsData = require("./scrapers/scrapeTimeSeries");
 //   );
 // });
 
-// //Every 12 hours
+//Every 12 hours
 cron.schedule("0 */12 * * *", () => {
   console.log("running cron");
   scrapeIndiaData(

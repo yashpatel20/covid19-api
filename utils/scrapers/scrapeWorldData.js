@@ -9,7 +9,7 @@ const scrapeWorldData = async (url) => {
     const table = document.querySelector("#thetable");
     const rowNodeList = table.querySelectorAll("tr");
     const rowArray = Array.from(rowNodeList);
-    return rowArray.slice(1, 19).map((tr, index) => {
+    return rowArray.slice(1, 33).map((tr, index) => {
       if (index === 0) {
         const Country = "World";
         const Cases = tr.querySelector("th:nth-child(2)").textContent;
