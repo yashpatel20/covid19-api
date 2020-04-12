@@ -15,9 +15,13 @@ const scrapeTsData = async (url) => {
       const Date = dataArray[0].textContent;
       const spanElem = dataArray[2].querySelector(".nowrap");
       const Cases = spanElem.querySelector("span:nth-child(1)").textContent;
+      const Deaths = dataArray[1].querySelector("div:nth-child(1)").title;
+      const Recovered = dataArray[1].querySelector("div:nth-child(2)").title;
       return {
         Date,
         Cases,
+        Deaths,
+        Recovered,
       };
     });
   });
@@ -30,6 +34,8 @@ const scrapeTsData = async (url) => {
       const indiaTS = new IndiaTS({
         Date: data[i].Date,
         Cases: data[i].Cases,
+        Deaths: data[i].Deaths,
+        Recovered: data[i].Recovered,
       });
       await indiaTS.save();
     }

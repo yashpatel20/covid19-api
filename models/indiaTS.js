@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const indiaTsSchema = mongoose.Schema({
   Date: String,
   Cases: String,
+  Deaths: String,
+  Recovered: String,
 });
 
 indiaTsSchema.set("toJSON", {
