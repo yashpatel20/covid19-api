@@ -8,15 +8,16 @@ const scrapeTsData = async (url) => {
   let dataIndiaTS = await page.evaluate(() => {
     const rowNodeList = document.querySelectorAll(".barbox tr");
     const rowArray = Array.from(rowNodeList);
-    const rowArrayFinal = rowArray.slice(2, rowArray.length - 1);
+    const rowArrayFinal = rowArray.slice(22, rowArray.length - 1);
     return rowArrayFinal.map((tr) => {
       const dataNodeList = tr.querySelectorAll("td");
       const dataArray = Array.from(dataNodeList);
       const Date = dataArray[0].textContent;
       const spanElem = dataArray[2].querySelector(".nowrap");
       const Cases = spanElem.querySelector("span:nth-child(1)").textContent;
-      const Deaths = dataArray[1].querySelector("div:nth-child(1)").title;
-      const Recovered = dataArray[1].querySelector("div:nth-child(2)").title;
+      const divElem = dataArray[1].querySelectorAll("div");
+      const Deaths = divElem[0].title;
+      const Recovered = divElem[1].title;
       return {
         Date,
         Cases,
